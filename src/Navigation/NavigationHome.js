@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-
+import * as React from 'react';
 import HomeScreen from '../Screens/HomeScreen';
 import ExpensesFScreen from '../Screens/ExpensesFScreen';
 import IncomesFScreen from '../Screens/IncomesFScreens';
