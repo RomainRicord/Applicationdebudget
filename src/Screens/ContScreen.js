@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import {  StyleSheet,  Text,  View,  Image,  TouchableOpacity,Pressable,ScrollView} from "react-native";
 import ContComponent from "../Components/ContComponent";
 
@@ -24,9 +24,9 @@ const ContScreen = (props) => {
   const GetData = async () => {
 
     await firestore()
+    .collection('Users')
+    .doc(UserContext_.user.uid)
     .collection('expenses')
-    .where('user', '==', UserContext_.user.uid)
-    .get()
     .then(documentSnapshot => {
 
       if (documentSnapshot != null) {
@@ -44,9 +44,9 @@ const ContScreen = (props) => {
     })
 
     await firestore()
+    .collection('Users')
+    .doc(UserContext_.user.uid)
     .collection('incomes')
-    .where('user', '==', UserContext_.user.uid)
-    .get()
     .then(documentSnapshot => {
 
       if (documentSnapshot != null) {
