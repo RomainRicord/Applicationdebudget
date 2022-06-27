@@ -20,16 +20,17 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
 
     const UserList = []
 
-    const addExpense = async ({user,amount,date,category,comments}) => {
+    const addExpense = async ({amount,date,category,comments}) => {
         await firestore().collection('expenses').add({
-            user: user,
             amount: amount,
             date: date,
             category: category,
             comments: comments
         }).then(() => {
             console.log('expenses added!');
-        });
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     const CategoryList = [
