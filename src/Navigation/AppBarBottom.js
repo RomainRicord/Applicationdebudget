@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import HomeScreen from '../Screens/HomeScreen';
 
-import StatScreen from '../Screens/StatScreen';
+//import StatScreen from '../Screens/StatScreen';
 import ContScreen from '../Screens/ContScreen';
 import NavigationHome from './NavigationHome'
 
@@ -16,17 +16,17 @@ const AppBarBottom = () => {
     const [routes] = React.useState([
         { key: 'home', title: 'Accueil', icon: 'home' },
         { key: 'account', title: 'Compte', icon: 'currency-eur' },
-        { key: 'stat', title: 'Statistiques', icon: 'chart-bar'}
+        //{ key: 'stat', title: 'Statistiques', icon: 'chart-bar'}
     ]);
 
     const HomeRoute = () => <NavigationHome selector={selector} setSelector={setSelector} userselected={userselected} setUserSelected={setUserSelected} />
     const AccountRoute = () => <ContScreen userselected={userselected} setUserSelected={setUserSelected}/>
-    const StatRoute = () => <StatScreen userselected={userselected} setUserSelected={setUserSelected} />
+    //const StatRoute = () => <StatScreen userselected={userselected} setUserSelected={setUserSelected} />
 
     const renderScene = BottomNavigation.SceneMap({
         home: HomeRoute,
         account: AccountRoute,
-        stat: StatRoute,
+        //stat: StatRoute,
     });
 
     return (
