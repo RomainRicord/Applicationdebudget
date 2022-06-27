@@ -31,7 +31,7 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
           console.log( typeof(documentSnapshot) ,documentSnapshot )
           setdata_(documentSnapshot.data())
         } else {
-          console.log(" Document does not exist ");
+          console.log(" Document does not exist ", UserContext_.user.uid);
         }
 
       })
