@@ -16,7 +16,8 @@ import firestore from '@react-native-firebase/firestore';
 
 const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
-  //const [data_, setdata_] = useState([])
+  const [data_, setdata_] = useState([])
+  
 
   const UserContext_ = useContext(UserContext)
 
@@ -26,9 +27,11 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
       .doc(UserContext_.user.uid)
       .onSnapshot(documentSnapshot => {
 
-        const data = documentSnapshot.data()
-
-        console.log("DATA",data)
+        if (documentSnapshot.exists) {
+          setdata_(documentSnapshot.data())
+        } else {
+          console.log(" Document does not exist ");
+        }
 
       })
 
