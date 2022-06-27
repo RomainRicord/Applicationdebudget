@@ -1,4 +1,4 @@
-package com.applicationdebudget;
+package com.estelleromain.applicationdebudget;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

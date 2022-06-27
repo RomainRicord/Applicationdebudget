@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "663683029333",
+    "project_id": "applicationdebudget",
+    "storage_bucket": "applicationdebudget.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663683029333:android:a64c9badd3f1f7d7ec37dc",
+        "android_client_info": {
+          "package_name": "com.estelleromain.applicationdebudget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663683029333-7cvvo10mmiuh7h1l9cu4qv43lbqvgn33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnVCpal3CU9w-iPZ1XHvr0NpuP86wwyQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663683029333-7cvvo10mmiuh7h1l9cu4qv43lbqvgn33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.applicationdebudget.newarchitecture.modules;
+package com.estelleromain.applicationdebudget.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
