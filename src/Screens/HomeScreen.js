@@ -25,10 +25,10 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
   const GetData = async () => {
 
     await firestore()
+    .collection('Users')
+    .doc(UserContext_.user.uid)
     .collection('expenses')
-    .where('user', '==', UserContext_.user.uid)
-    .get()
-    .then(documentSnapshot => {
+    .onSnapshot(documentSnapshot => {
 
       if (documentSnapshot != null) {
         console.log( typeof(documentSnapshot) ,documentSnapshot )
@@ -40,10 +40,10 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
     })
 
     await firestore()
+    .collection('Users')
+    .doc(UserContext_.user.uid)
     .collection('incomes')
-    .where('user', '==', UserContext_.user.uid)
-    .get()
-    .then(documentSnapshot => {
+    .onSnapshot(documentSnapshot => {
 
       if (documentSnapshot != null) {
         console.log( typeof(documentSnapshot) ,documentSnapshot )

@@ -22,7 +22,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
     const UserList = []
 
     const addExpense = async ({amount,date,category,comments}) => {
-        await firestore().collection('expenses').add({
+        await firestore().collection('Users').doc(UserContext_.user.uid).collection('expenses').add({
             amount: amount,
             date: date,
             category: category,
