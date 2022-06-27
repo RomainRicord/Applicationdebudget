@@ -8,7 +8,7 @@ const App = () => {
   const [user, setUser] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  
+  const [errorMessage, setErrorMessage] = useState();
 
   // Handle user state changes
   function onAuthStateChanged(user) {
@@ -29,7 +29,10 @@ const App = () => {
         <Text>Login with Email</Text>
         <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
         <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} placeholder="Password" onChangeText={(e) => setPassword(e) } />
-        <Button title="Login" onPress={() => auth().signInWithEmailAndPassword(email, password)} />
+        <Button title="Login" onPress={() => auth().signInWithEmailAndPassword(email, password).catch(error => setErrorMessage(error.message) )} />
+
+        {errorMessage && <Text style={{color:'red'}}>{errorMessage}</Text>}
+
         <Text>Signup with Email</Text>
         <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} value={email} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
         <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} value={password} placeholder="Password" onChangeText={(e) => setPassword(e) } />
