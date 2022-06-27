@@ -28,7 +28,7 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
       .onSnapshot(documentSnapshot => {
 
         if (typeof(documentSnapshot) != "undefined") {
-          console.log(typeof(documentSnapshot))
+          console.log(typeof(documentSnapshot),documentSnapshot)
           setdata_(documentSnapshot.data())
         } else {
           console.log(" Document does not exist ");

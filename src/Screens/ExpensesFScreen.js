@@ -6,6 +6,7 @@ import {Picker} from '@react-native-picker/picker'
 //import { Picker } from 'react-native-web';
 import * as Yup from 'yup';
 import { Dimensions } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -18,6 +19,18 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
     // const [comments, setComments] = useState('')
 
     const UserList = []
+
+    const addExpense = async ({user,amount,date,category,comments}) => {
+        await firestore().collection('expenses').add({
+            user: user,
+            amount: amount,
+            date: date,
+            category: category,
+            comments: comments
+        }).then(() => {
+            console.log('expenses added!');
+        });
+    }
 
     const CategoryList = [
         "Alimentaire",
@@ -117,7 +130,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                             <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
                                 handleSubmit()
                                 if (isValid) {
-                                    setSelector(0)
+                                    addExpense(values)
                                 }
                             }}>
                                 <Text style={styles.textbutton}>Enregistrer</Text>
