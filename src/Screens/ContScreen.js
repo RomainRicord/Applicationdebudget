@@ -2,16 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState,useEffect } from "react";
 import {  StyleSheet,  Text,  View,  Image,  TouchableOpacity,Pressable,ScrollView} from "react-native";
 import ContComponent from "../Components/ContComponent";
-import UserListComponent from "../Components/UserListComponent";
 
-import {data_} from "../json/data";
-
-import {expensesandincomes} from '../json/expensesandincomes'
-
-import data from "../../assets/data.json";
-
-import { individuel } from "../json/individuel";
-
+import UserContext from "../Components/UserContext";
 
 const ContScreen = (props) => {
   const {userselected,setUserSelected} = props
@@ -20,31 +12,41 @@ const ContScreen = (props) => {
 
   //console.log("PROPS OF CONTSCREEN",props)
 
+  const UserContext_ = useContext(UserContext)
+
   return (
   <View style={styles.container}>
-        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {data[userselected].user}!</Text>
+        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {UserContext_.user.email}!</Text>
         
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <Text>Solde: {Number(data_()[userselected]).toFixed(2)}€</Text>
-            <Text>Dépenses: {Number(individuel().expenses[userselected]).toFixed(2)}€</Text>
-            <Text>Revenus: {Number(individuel().incomes[userselected]).toFixed(2)}€</Text>
+
           </View>
           
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
           
-            {expensesandincomes().two[userselected].sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
-              <View key={index} style={[styles.contComponent]}>                 
-                <ContComponent style={[styles.contComponent]} comments={item.comments}  name={item.category} category={item.category} date={item.date} montant={((typeof(item._id_income) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
-              </View>
-            ))}
+            
           
         </ScrollView>
   </View>
   );
 }
+
+/*
+
+<Text>Solde: {Number(data_()[userselected]).toFixed(2)}€</Text>
+            <Text>Dépenses: {Number(individuel().expenses[userselected]).toFixed(2)}€</Text>
+            <Text>Revenus: {Number(individuel().incomes[userselected]).toFixed(2)}€</Text>
+
+{expensesandincomes().two[userselected].sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
+              <View key={index} style={[styles.contComponent]}>                 
+                <ContComponent style={[styles.contComponent]} comments={item.comments}  name={item.category} category={item.category} date={item.date} montant={((typeof(item._id_income) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
+              </View>
+            ))}
+
+            */
 
 export default ContScreen
  
