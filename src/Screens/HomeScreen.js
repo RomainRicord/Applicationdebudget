@@ -26,11 +26,9 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
       .doc(UserContext_.user.uid)
       .onSnapshot(documentSnapshot => {
 
-        documentSnapshot.then(data => {
-          console.log('User data: ', data());
-        }).catch(error => {
-          console.log("Error getting documents: ", error);
-        })
+        const data = documentSnapshot.data()
+
+        console.log("DATA",data)
 
       })
 
