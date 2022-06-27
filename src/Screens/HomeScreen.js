@@ -21,23 +21,28 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
   const UserContext_ = useContext(UserContext)
 
+  const GetData = async () => {
+
+    await firestore()
+    .collection('expenses')
+    .where('user', '==', UserContext_.user.uid)
+    .get()
+    .then(documentSnapshot => {
+
+      if (documentSnapshot != null) {
+        console.log( typeof(documentSnapshot) ,documentSnapshot )
+        setdata_(documentSnapshot.docs)
+      } else {
+        console.log(" Document does not exist ");
+      }
+
+    })
+
+  }
+
+
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('expenses')
-      .where('user', '==', UserContext_.user.uid)
-      .onSnapshot(documentSnapshot => {
-
-        if (documentSnapshot != null) {
-          console.log( typeof(documentSnapshot) ,documentSnapshot )
-          setdata_(documentSnapshot.data())
-        } else {
-          console.log(" Document does not exist ");
-        }
-
-      })
-
-    // Stop listening for updates when no longer required
-    return () => subscriber();
+    GetData()
   }, [UserContext_.user.uid]);
 
   return (
