@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text,Button } from 'react-native';
+import { View, Text,Button,TextInput } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const App = () => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
-
-  const onGoogleButtonPress = async () => {
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
 
   // Handle user state changes
   function onAuthStateChanged(user) {
@@ -35,17 +26,34 @@ const App = () => {
   if (!user) {
     return (
       <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Text>Login with Google</Text>
-        <Button
-          title="Google Sign-In"
-          onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-        />
+        <Text>Login with Email</Text>
+        <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
+        <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} placeholder="Password" onChangeText={(e) => setPassword(e) } />
+        <Button title="Login" onPress={() => auth().signInWithEmailAndPassword(email, password)} />
+        <Text>Signup with Email</Text>
+        <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} value={email} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
+        <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} value={password} placeholder="Password" onChangeText={(e) => setPassword(e) } />
+        <Button title="Login" onPress={() => auth().createUserWithEmailAndPassword(email, password).then(() => {
+          console.log("User created");
+        }).catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
+      
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+      
+          console.error(error);
+        })
+        
+        } />
       </View>
     );
   }
 
   return (
-    <View>
+    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
       <Text>Welcome {user.email}</Text>
     </View>
   );
