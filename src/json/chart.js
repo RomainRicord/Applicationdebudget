@@ -1,4 +1,4 @@
-import data from '../../assets/data.json';
+
 
 import dayjs from 'dayjs'
 

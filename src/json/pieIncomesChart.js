@@ -1,4 +1,4 @@
-import data from '../../assets/data.json';
+
 
 const colorcategory = {
     "Alimentaire":"#ff0000",

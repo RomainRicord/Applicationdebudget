@@ -1,4 +1,4 @@
-const data = require('../../assets/data.json');
+
 
 export const data_ = () => {
 

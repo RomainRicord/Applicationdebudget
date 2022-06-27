@@ -2,13 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState,useEffect } from "react";
 import {  StyleSheet,  Text,  View,  Image,  TouchableOpacity,Pressable,ScrollView} from "react-native";
 import TransactionComponent from "../Components/TransactionComponent";
-import UserListComponent from "../Components/UserListComponent";
+//import UserListComponent from "../Components/UserListComponent";
 
-import {data_} from "../json/data";
+//import {data_} from "../json/data";
 
-import {expensesandincomes} from '../json/expensesandincomes'
-
-import data from "../../assets/data.json";
+//import {expensesandincomes} from '../json/expensesandincomes'
 
 import { createStackNavigator } from '@react-navigation/stack';
 
