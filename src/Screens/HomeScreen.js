@@ -16,8 +16,9 @@ import firestore from '@react-native-firebase/firestore';
 
 const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
+  const [expenses, setexpenses] = useState([])
+  const [incomes, setincomes] = useState([])
   const [data_, setdata_] = useState([])
-  
 
   const UserContext_ = useContext(UserContext)
 
@@ -31,12 +32,29 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
       if (documentSnapshot != null) {
         console.log( typeof(documentSnapshot) ,documentSnapshot )
-        setdata_(documentSnapshot.docs)
+        setexpenses(documentSnapshot._docs)
       } else {
         console.log(" Document does not exist ");
       }
 
     })
+
+    await firestore()
+    .collection('incomes')
+    .where('user', '==', UserContext_.user.uid)
+    .get()
+    .then(documentSnapshot => {
+
+      if (documentSnapshot != null) {
+        console.log( typeof(documentSnapshot) ,documentSnapshot )
+        setincomes(documentSnapshot._docs)
+      } else {
+        console.log(" Document does not exist ");
+      }
+
+    })
+
+    setdata_(expenses.concat(incomes))
 
   }
 
@@ -58,7 +76,11 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-
+        {data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
+              <View key={index}>                 
+                <TransactionComponent name={item.category} category={item.category} date={item.date} montant={((typeof(item.incomes) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
+              </View>
+          ))}
             
           
         </ScrollView>

@@ -27,7 +27,8 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
             date: date,
             category: category,
             comments: comments,
-            user:UserContext_.user.uid
+            user:UserContext_.user.uid,
+            expense:true
         }).then(() => {
             console.log('expenses added!');
         }).catch(error => {

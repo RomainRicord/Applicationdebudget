@@ -2,10 +2,11 @@ import React, { useState,useContext } from 'react'
 import { Button, TextInput, View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Formik, useFormik } from 'formik';
 import dayjs from 'dayjs';
-import {Picker} from '@react-native-picker/picker'
 //import { Picker } from 'react-native-web';
 import * as Yup from 'yup';
 import { Dimensions } from 'react-native';
+import UserContext from "../Components/UserContext";
+import firestore from '@react-native-firebase/firestore';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,6 +17,8 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
     // const [date, setDate] = useState(new Date())
      const [category, setCategory] = useState('')
     // const [comments, setComments] = useState('')
+
+    const UserContext_ = useContext(UserContext)
 
     const CategoryList = [
         "Salaire et assimilé",
@@ -28,6 +31,21 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
         "Revenu exceptionnel",
         "Autre revenu"
     ]
+
+    const addIncomes = async ({amount,date,category,comments}) => {
+        await firestore().collection('incomes').add({
+            amount: amount,
+            date: date,
+            category: category,
+            comments: comments,
+            user:UserContext_.user.uid,
+            incomes:true
+        }).then(() => {
+            console.log('incomes added!');
+        }).catch(error => {
+            console.log(error);
+        })
+    }
 
     const validationIncomes = Yup.object().shape({
         amount: Yup
@@ -46,7 +64,6 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
     })
 
     const initialValues = {
-        user: '',
         amount: '',
         date:dayjs(new Date()).format('DD/MM/YYYY'),
         category: '',
@@ -60,8 +77,6 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
         onSubmit:{handleSubmit}
     });*/
 
-
-
     return (
         
         <Formik
@@ -73,8 +88,6 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
             {({ handleChange, handleBlur, handleSubmit, values,errors,isValid }) => (
                 <View style={styles.container}>
                     <Text style={styles.title}>Ajout Revenus</Text>
-                    
-                            
                             <Text style={styles.label}>Montant</Text>
                             <TextInput
                                 style={styles.input}
@@ -118,7 +131,7 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
                             <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
                                 handleSubmit()
                                 if (isValid) {
-                                    setSelector(0)
+                                    addIncomes(values)
                                 }
                             }}>
                                 <Text style={styles.textbutton}>Enregistrer</Text>

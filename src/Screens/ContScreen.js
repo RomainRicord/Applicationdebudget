@@ -5,8 +5,15 @@ import ContComponent from "../Components/ContComponent";
 
 import UserContext from "../Components/UserContext";
 
+import firestore from '@react-native-firebase/firestore';
+
 const ContScreen = (props) => {
   const {userselected,setUserSelected} = props
+  const [expenses, setexpenses] = useState(0)
+  const [incomes, setincomes] = useState(0)
+  const [solde,setSolde] = useState(0)
+  const [expenses_array, setexpenses_array] = useState([])
+  const [incomes_array, setincomes_array] = useState([])
     
   //const [data_, setdata_] = useState([])
 
@@ -14,20 +21,74 @@ const ContScreen = (props) => {
 
   const UserContext_ = useContext(UserContext)
 
+  const GetData = async () => {
+
+    await firestore()
+    .collection('expenses')
+    .where('user', '==', UserContext_.user.uid)
+    .get()
+    .then(documentSnapshot => {
+
+      if (documentSnapshot != null) {
+        console.log( typeof(documentSnapshot) ,documentSnapshot )
+        setexpenses_array(documentSnapshot._docs)
+        documentSnapshot._docs.map(doc => {
+          
+          setexpenses(expenses+doc._data.amount)
+          setSolde(solde-doc._data.amount)
+        })
+      } else {
+        console.log(" Document does not exist ");
+      }
+
+    })
+
+    await firestore()
+    .collection('incomes')
+    .where('user', '==', UserContext_.user.uid)
+    .get()
+    .then(documentSnapshot => {
+
+      if (documentSnapshot != null) {
+        console.log( typeof(documentSnapshot) ,documentSnapshot )
+        setincomes_array(documentSnapshot._docs)
+        documentSnapshot._docs.map(doc => {
+          setincomes(incomes+doc._data.amount)
+          setSolde(solde+doc._data.amount)
+        })
+      } else {
+        console.log(" Document does not exist ");
+      }
+
+    })
+
+    setdata_(expenses_array.concat(incomes_array))
+
+  }
+
+  useEffect(() => {
+    GetData()
+  }, [UserContext_.user.uid]);
+
   return (
   <View style={styles.container}>
         <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {UserContext_.user.email}!</Text>
         
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-
+            <Text>Solde: {solde.toFixed(2)}€</Text>
+            <Text>Dépenses: {expenses.toFixed(2)}€</Text>
+            <Text>Revenus: {incomes.toFixed(2)}€</Text>
           </View>
           
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-          
-            
+          {data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
+                <View key={index} style={[styles.contComponent]}>                 
+                  <ContComponent style={[styles.contComponent]} comments={item.comments}  name={item.category} category={item.category} date={item.date} montant={((typeof(item.incomes) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
+                </View>
+          ))} 
           
         </ScrollView>
   </View>
