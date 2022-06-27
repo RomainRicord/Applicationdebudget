@@ -2,10 +2,11 @@ import React, { useState,useContext } from 'react'
 import { Button, TextInput, View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Formik, useFormik } from 'formik';
 import dayjs from 'dayjs';
-import {Picker} from '@react-native-picker/picker'
+
 //import { Picker } from 'react-native-web';
 import * as Yup from 'yup';
 import { Dimensions } from 'react-native';
+import UserContext from "../Components/UserContext";
 import firestore from '@react-native-firebase/firestore';
 
 const windowWidth = Dimensions.get('window').width;
@@ -17,7 +18,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
     // const [date, setDate] = useState(new Date())
      const [category, setCategory] = useState('')
     // const [comments, setComments] = useState('')
-
+    const UserContext_ = useContext(UserContext)
     const UserList = []
 
     const addExpense = async ({amount,date,category,comments}) => {
@@ -25,7 +26,8 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
             amount: amount,
             date: date,
             category: category,
-            comments: comments
+            comments: comments,
+            user:UserContext_.user.uid
         }).then(() => {
             console.log('expenses added!');
         }).catch(error => {

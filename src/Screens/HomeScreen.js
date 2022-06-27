@@ -23,12 +23,12 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
   useEffect(() => {
     const subscriber = firestore()
-      .collection('Users')
-      .doc(UserContext_.user.uid)
+      .collection('expenses')
+      .where('user', '==', UserContext_.user.uid)
       .onSnapshot(documentSnapshot => {
 
-        if ((documentSnapshot) != null) {
-          console.log(typeof(documentSnapshot), documentSnapshot)
+        if (documentSnapshot != null) {
+          console.log( typeof(documentSnapshot) ,documentSnapshot )
           setdata_(documentSnapshot.data())
         } else {
           console.log(" Document does not exist ");
