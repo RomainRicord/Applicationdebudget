@@ -6,6 +6,8 @@ import StatScreen from '../Screens/StatScreen';
 import ContScreen from '../Screens/ContScreen';
 import NavigationHome from './NavigationHome'
 
+import auth from '@react-native-firebase/auth';
+
 const AppBarBottom = () => {
 
     const [userselected, setUserSelected] = React.useState(0)

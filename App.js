@@ -1,6 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text,Button,TextInput } from 'react-native';
+import React, { useState, useEffect, createContext } from 'react';
+import { View, Text,Button,TextInput,StyleSheet } from 'react-native';
+
+import Navigation from './src/Navigation/Navigation';
+import UserComponent from './src/Components/UserComponent';
+import UserListComponent from './src/Components/UserListComponent';
+
+import TransactionComponent from './src/Components/TransactionComponent';
+import HomeScreen from './src/Screens/HomeScreen';
+import ChartComponent from './src/Components/ChartComponent';
+
+import IncomesFScreens from './src/Screens/IncomesFScreens';
+
+import ContScreen from './src/Screens/ContScreen';
+import IncomesFScreen from './src/Screens/IncomesFScreens';
+
+import StatScreen from './src/Screens/StatScreen';
+
+import AppBarBottom from './src/Navigation/AppBarBottom';
 import auth from '@react-native-firebase/auth';
+
+import UserContext from './src/Components/UserContext';
 
 const App = () => {
   // Set an initializing state whilst Firebase connects
@@ -56,11 +75,9 @@ const App = () => {
   }
 
   return (
-    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-      <Text>Welcome {user.email}</Text>
-      <Button title="Sign out" onPress={() => auth().signOut()} />
-
-    </View>
+    <UserContext.Provider value={{user:user}}>
+      <AppBarBottom />
+    </UserContext.Provider>
   );
 }
 

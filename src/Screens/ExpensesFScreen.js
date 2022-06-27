@@ -17,18 +17,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
      const [category, setCategory] = useState('')
     // const [comments, setComments] = useState('')
 
-    const UserList = [
-        "Mayer Franklin",
-        "Ross Hess",
-        "Ingram Witt",
-        "Mccormick Harrison",
-        "Garcia Brown",
-        "Ramsey Le",
-        "Witt Tyler",
-        "Diana Leon",
-        "Millie Mcknight",
-        "Daugherty Middleton"
-    ]
+    const UserList = []
 
     const CategoryList = [
         "Alimentaire",
@@ -43,10 +32,6 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
     ]
 
     const validationIncomes = Yup.object().shape({
-        user: Yup
-        .string()
-        .required("Selectionner un bénéficiaire")
-        .oneOf(UserList),
         amount: Yup
         .number("Montant invalide !")
         .required("Mettre un montant"),
@@ -63,7 +48,6 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
     })
 
     const initialValues = {
-        user: '',
         amount: '',
         date:dayjs(new Date()).format('DD/MM/YYYY'),
         category: '',
@@ -90,23 +74,6 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
             {({ handleChange, handleBlur, handleSubmit, values,errors,isValid }) => (
                 <View style={styles.container}>
                     <Text style={styles.title}>Ajout Dépenses</Text>
-                    
-                            <Text style={styles.label}>Bénéficiaire</Text>
-                            <Picker
-                                style={styles.input}
-                                selectedValue={user}
-                                onValueChange={(itemValue, itemIndex) => {
-                                    values.user = itemValue 
-                                    setUser(itemValue)
-                                }}
-                            >
-                                {UserList.map((item, index) => {
-                                    return (<Picker.Item label={item} value={item} key={index} />)
-                                })}
-                            </Picker>
-                            {errors.user &&
-                                <Text style={styles.error}>{errors.user}</Text>
-                            }
                             <Text style={styles.label}>Montant</Text>
                             <TextInput
                                 style={styles.input}
@@ -129,19 +96,11 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                                 <Text style={styles.error}>{errors.date}</Text>
                             }
                             <Text style={styles.label}>Catégorie</Text>
-                            <Picker
-                                style={styles.input}
-                                selectedValue={category}
-                                onValueChange={(itemValue, itemIndex) => {
-                                    values.category = itemValue 
-                                    setCategory(itemValue)
-                                }}
-                            // selectedValue={category}
-                            >
-                                {CategoryList.map((item, index) => {
-                                    return (<Picker.Item label={item} value={item} key={index} />)
-                                })}
-                            </Picker>
+                            <TextInput
+                                style={styles.comments}                           
+                                onChangeText={handleChange('category')}
+                                onBlur={handleBlur('category')}
+                            />
                             {errors.category &&
                                 <Text style={styles.error}>{errors.category}</Text>
                             }

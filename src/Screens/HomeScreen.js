@@ -12,17 +12,31 @@ import data from "../../assets/data.json";
 
 import { createStackNavigator } from '@react-navigation/stack';
 
+import UserContext from "../Components/UserContext";
+
+import firestore from '@react-native-firebase/firestore';
 
 const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
   //const [data_, setdata_] = useState([])
 
+  const UserContext_ = useContext(UserContext)
+
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('Users')
+      .doc(UserContext_.user.uid)
+      .onSnapshot(documentSnapshot => {
+        console.log('User data: ', documentSnapshot.data());
+      });
+
+    // Stop listening for updates when no longer required
+    return () => subscriber();
+  }, [UserContext_.user.uid]);
+
   return (
   <View style={styles.container}>
-        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {data[userselected].user}!</Text>
-        <View style={{backgroundColor:'white',height:120,display:'flex',justifyContent:'center'}}>
-          <UserListComponent userselected={userselected} listrevenus={data_()} setUserSelected={setUserSelected} />
-        </View>
+        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {UserContext_.user.email}!</Text>
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <Pressable style={[styles.button,{backgroundColor:'green'}]} onPress={() => {setSelector(2)}}>
             <Text style={styles.textbutton}>Revenu</Text>
@@ -33,17 +47,22 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-          
-            {expensesandincomes().two[userselected].sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
-              <View key={index}>                 
-                <TransactionComponent name={item.category} category={item.category} date={item.date} montant={((typeof(item._id_income) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
-              </View>
-            ))}
+
+            
           
         </ScrollView>
   </View>
   );
 }
+
+/*
+
+{firestore().collection('Users').get().sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
+              <View key={index}>                 
+                <TransactionComponent name={item.category} category={item.category} date={item.date} montant={((typeof(item._id_income) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
+              </View>
+            ))}
+*/
 
 export default HomeScreen
  
