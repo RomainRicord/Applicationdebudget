@@ -55,6 +55,8 @@ const App = () => {
   return (
     <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
       <Text>Welcome {user.email}</Text>
+      <Button title="Sign out" onPress={() => auth().signOut()} />
+
     </View>
   );
 }
