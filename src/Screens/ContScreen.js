@@ -14,6 +14,7 @@ const ContScreen = (props) => {
   const [solde,setSolde] = useState(0)
   const [expenses_array, setexpenses_array] = useState([])
   const [incomes_array, setincomes_array] = useState([])
+  const [data_, setdata_] = useState([])
     
   //const [data_, setdata_] = useState([])
 
@@ -23,20 +24,48 @@ const ContScreen = (props) => {
 
   const GetData = async () => {
 
+    setexpenses_array([])
+    setincomes_array([])
+    setdata_([])
+    setSolde(0)
+    setexpenses(0)
+    setincomes(0)
+
     await firestore()
     .collection('Users')
     .doc(UserContext_.user.uid)
     .collection('expenses')
+    .get()
     .then(documentSnapshot => {
 
+      let expenses_n = 0
+
       if (documentSnapshot != null) {
-        console.log( typeof(documentSnapshot) ,documentSnapshot )
-        setexpenses_array(documentSnapshot._docs)
-        documentSnapshot._docs.map(doc => {
+
+        console.log( "EXPENSES",typeof(documentSnapshot) ,documentSnapshot )
+
+        console.log("EXPENSES DATA",documentSnapshot._docs)
+
+        for (let i = 0; i < documentSnapshot._docs.length; i++) {
           
-          setexpenses(expenses+doc._data.amount)
-          setSolde(solde-doc._data.amount)
-        })
+          expenses_n = expenses_n + Number(documentSnapshot._docs[i].data().amount)
+          setexpenses(expenses_n)
+          
+          console.log("Dépenses",expenses_n,expenses)
+          
+        }
+
+        /*
+        console.log( "EXPENSES",typeof(documentSnapshot) ,documentSnapshot )
+        setexpenses_array(documentSnapshot._docs)
+
+        for (let i = 0; i < documentSnapshot._docs.length; i++) {
+          console.log("Dépenses",documentSnapshot._docs[i].data().amount,expenses)
+          setexpenses(expenses+documentSnapshot._docs[i].data().amount)
+          setSolde(solde-documentSnapshot._docs[i].data().amount)
+        }
+        */
+
       } else {
         console.log(" Document does not exist ");
       }
@@ -47,15 +76,24 @@ const ContScreen = (props) => {
     .collection('Users')
     .doc(UserContext_.user.uid)
     .collection('incomes')
+    .get()
     .then(documentSnapshot => {
 
+      let incomes_n = 0
+
       if (documentSnapshot != null) {
-        console.log( typeof(documentSnapshot) ,documentSnapshot )
-        setincomes_array(documentSnapshot._docs)
-        documentSnapshot._docs.map(doc => {
-          setincomes(incomes+doc._data.amount)
-          setSolde(solde+doc._data.amount)
-        })
+        console.log( "INCOMES",typeof(documentSnapshot) ,documentSnapshot )
+
+        console.log("INCOMES DATA",documentSnapshot._docs)
+
+        for (let i = 0; i < documentSnapshot._docs.length; i++) {
+          
+          incomes_n = incomes_n + Number(documentSnapshot._docs[i].data().amount)
+          setincomes(incomes_n)
+         
+          console.log("Revenus",incomes_n,incomes)
+          
+        }
       } else {
         console.log(" Document does not exist ");
       }
@@ -63,11 +101,21 @@ const ContScreen = (props) => {
     })
 
     setdata_(expenses_array.concat(incomes_array))
+    console.log("SET SOLDE !!!!",incomes-expenses,incomes,expenses)
+    setSolde(incomes-expenses)
+
+  }
+
+  const SetSolde_ = async () => {
+
+    console.log("SET SOLDE !!!!",incomes-expenses,incomes,expenses)
+    setSolde(incomes-expenses)
 
   }
 
   useEffect(() => {
     GetData()
+    SetSolde_()
   }, [UserContext_.user.uid]);
 
   return (
@@ -76,19 +124,22 @@ const ContScreen = (props) => {
         
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <Text>Solde: {solde.toFixed(2)}€</Text>
-            <Text>Dépenses: {expenses.toFixed(2)}€</Text>
-            <Text>Revenus: {incomes.toFixed(2)}€</Text>
+            <Text style={{color:'black'}}>Solde: {solde}€</Text>
+            <Text style={{color:'black'}}>Dépenses: {expenses}€</Text>
+            <Text style={{color:'black'}}>Revenus: {incomes}€</Text>
           </View>
           
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-          {data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
+          {data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => {
+            
+            console.log("DATATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",item)
+            return(
                 <View key={index} style={[styles.contComponent]}>                 
-                  <ContComponent style={[styles.contComponent]} comments={item.comments}  name={item.category} category={item.category} date={item.date} montant={((typeof(item.incomes) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
+                  <ContComponent style={[styles.contComponent]} comments={item._data.comments}  name={item._data.category} category={item._data.category} date={item._data.date} montant={((typeof(item._data.incomes) == "undefined") ? -Number(item._data.amount) : Number(item._data.amount))} />              
                 </View>
-          ))} 
+          )})} 
           
         </ScrollView>
   </View>

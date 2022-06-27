@@ -33,15 +33,15 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
     ]
 
     const addIncomes = async ({amount,date,category,comments}) => {
-        await firestore().collection('incomes').add({
+        await firestore().collection('Users').doc(UserContext_.user.uid).collection('incomes').add({
             amount: amount,
             date: date,
             category: category,
             comments: comments,
             user:UserContext_.user.uid,
-            incomes:true
+            expense:true
         }).then(() => {
-            console.log('incomes added!');
+            console.log('expenses added!');
         }).catch(error => {
             console.log(error);
         })
