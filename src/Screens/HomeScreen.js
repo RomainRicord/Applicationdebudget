@@ -25,9 +25,13 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
       .collection('Users')
       .doc(UserContext_.user.uid)
       .onSnapshot(documentSnapshot => {
-        console.log('User data: ', documentSnapshot.data());
-      }).catch(error => {
-        console.log('Error getting documents: ', error);
+
+        documentSnapshot.then(data => {
+          console.log('User data: ', data());
+        }).catch(error => {
+          console.log("Error getting documents: ", error);
+        })
+
       })
 
     // Stop listening for updates when no longer required
