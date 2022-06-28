@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View,Dimensions,Platfrom,Text,ScrollView} from 'react-native';
 
 import {
@@ -14,17 +14,20 @@ import {pieIncomesChart} from '../json/pieIncomesChart'
 
 import ChartComponent from '../Components/ChartComponent';
 
+import UserContext from "../Components/UserContext";
+
 const StatScreen = (props) => {
 
     const {userselected,setUserSelected} = props
 
+    const UserContext_ = useContext(UserContext)
 
     return (
-        <ScrollView>
-          <View style={{display:'flex',justifyContent:'center',alignItems:'center',flex:1,marginTop:40}}>
+        <ScrollView style={{backgroundColor: 'rgb(14,14,14)'}}>
+          <View style={{display:'flex',justifyContent:'center',alignItems:'center',flex:1,marginTop:40,backgroundColor: 'rgb(14,14,14)'}}>
         <Text style={{fontSize:32,fontWeight:'bold'}}>Statistique des revenus</Text>
         <PieChart
-          data={pieIncomesChart(Number(userselected)).line}
+          data={pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line}
           width={200} // from react-native
           height={240}
           chartConfig={{
@@ -47,7 +50,7 @@ const StatScreen = (props) => {
         />
 
         
-          {pieIncomesChart(Number(userselected)).line.map((item,index) => {
+          {pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line.map((item,index) => {
             return(
               <View key={index} style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                 <View style={{backgroundColor:item.color,width:20,height:20,borderRadius:40,marginRight:10}}></View><Text style={{fontSize:20}}>{item.name} -> {item.amount}€</Text>
@@ -57,7 +60,7 @@ const StatScreen = (props) => {
 
 <Text style={{fontSize:32,fontWeight:'bold'}}>Statistique des dépenses</Text>
         <PieChart
-          data={pieIncomesChart(Number(userselected)).line2}
+          data={pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line2}
           width={200} // from react-native
           height={240}
           chartConfig={{
@@ -80,7 +83,7 @@ const StatScreen = (props) => {
         />
 
         
-          {pieIncomesChart(Number(userselected)).line2.map((item,index) => {
+          {pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line2.map((item,index) => {
             return(
               <View key={index} style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                 <View style={{backgroundColor:item.color,width:20,height:20,borderRadius:40,marginRight:10}}></View><Text style={{fontSize:20}}>{item.name} -> {item.amount}€</Text>
@@ -88,12 +91,12 @@ const StatScreen = (props) => {
             )
           })}
 
-          <ChartComponent userselected={userselected} />
+          <ChartComponent />
         </View>     
       </ScrollView>      
     )
 }
-
+// <ChartComponent />
 export default StatScreen
 
 const styles = StyleSheet.create({
@@ -101,5 +104,6 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent:'center',
       alignItems:'center',
+      backgroundColor: 'rgb(14,14,14)'
     }
 });

@@ -26,6 +26,8 @@ const colorcategory_incomes2 = {
 
 export const pieIncomesChart = (expenses_array,incomes_array) => {
 
+    console.log("expenses_array",expenses_array)
+
     let category_incomes = []
     let category_expenses = []
     
@@ -106,6 +108,8 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
     //console.log(date)
 
     //console.log(category)
+
+    console.log("line2",line2,"line",line)
 
     return { line2, line }
 }

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState,useEffect,useContext } from "react";
 import {  StyleSheet,  Text,  View,  Image,  TouchableOpacity,Pressable,ScrollView} from "react-native";
 import TransactionComponent from "../Components/TransactionComponent";
@@ -22,7 +21,7 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
   return (
   <View style={styles.container}>
-        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center',color:'black'}}>Welcome {UserContext_.user.email}!</Text>
+        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center',color:'white'}}>Welcome {UserContext_.user.email}!</Text>
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <Pressable style={[styles.button,{backgroundColor:'green'}]} onPress={() => {setSelector(2)}}>
             <Text style={styles.textbutton}>Revenu</Text>
@@ -63,7 +62,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "rgb(14,14,14)",
 
   },
   button:{

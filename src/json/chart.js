@@ -2,40 +2,38 @@
 
 import dayjs from 'dayjs'
 
-export const chart = (userselected) => {
+export const chart = (expenses_array,incomes_array) => {
 
     let incomes = []
     let expenses = []
 
 
+    console.log("chart",expenses_array,incomes_array)
 
-        data[userselected].incomes.map((item2, index) => {             
-  
-            if (typeof(incomes[index]) == "undefined") {
-                incomes[index] = []
-            }
-            
-            
-            const n = Math.ceil(Number(item2.amount.replace("€","").replace(",","")))
+    incomes_array.map((item2, index) => {             
 
-            incomes[index].push({date:item2.date,amount:n})
-  
-        })
+        if (typeof(incomes[index]) == "undefined") {
+            incomes[index] = []
+        }
+        
+        
+        const n = Math.ceil(Number(item2._data.amount))
 
-        data[userselected].expenses.map((item2, index) => {          
-  
-            if (typeof(expenses[index]) == "undefined") {
-                expenses[index] = []
-            }
-            
-            
-            const n = Math.ceil(Number(item2.amount.replace("€","").replace(",","")))
+        incomes[index].push({date:item2._data.date,amount:n})
 
-            expenses[index].push({date:item2.date,amount:n})
-  
-        })
+    })
 
+    expenses_array.map((item2, index) => {          
 
+        if (typeof(expenses[index]) == "undefined") {
+            expenses[index] = []
+        }
+        
+        const n = Math.ceil(Number(item2._data.amount))
+
+        expenses[index].push({date:item2._data.date,amount:n})
+
+    })
 
     let line = {
         labels: ['01','02',"03","04","05","06","07","08","09","10","11","12","13"],

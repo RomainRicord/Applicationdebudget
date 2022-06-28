@@ -25,9 +25,9 @@ const ContScreen = (props) => {
         
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <Text style={{color:'black'}}>Solde: {UserContext_.solde}€</Text>
-            <Text style={{color:'black'}}>Dépenses: {UserContext_.expenses}€</Text>
-            <Text style={{color:'black'}}>Revenus: {UserContext_.incomes}€</Text>
+            <Text style={{color:'white'}}>Solde: {UserContext_.solde}€</Text>
+            <Text style={{color:'white'}}>Dépenses: {UserContext_.expenses}€</Text>
+            <Text style={{color:'white'}}>Revenus: {UserContext_.incomes}€</Text>
           </View>
           
         </View>
@@ -66,7 +66,7 @@ export default ContScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "rgb(14,14,14)",
 
   },
   button:{
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
 
   signinText:{
     fontWeight: "bold",
-    color:"black"
+    color:"white"
   },
 
   message:{
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     borderRadius:10,
     borderWidth:1,
     borderColor:"#000000",
-    backgroundColor:"#FFFFFF" 
+    backgroundColor:"rgba(48,48,48,0.5)" 
 
   }
 });
