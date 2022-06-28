@@ -27,7 +27,6 @@ const App = () => {
   const SetSolde_ = async (uid) => {
 
     await GetData(uid).then(data => {
-      console.log("GetData",data)
       setexpenses(data.expense__)
       setincomes(data.incomes__)
       setexpenses_array(data.expenses__array)
@@ -73,7 +72,7 @@ const App = () => {
         <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} value={email} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
         <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} value={password} placeholder="Password" onChangeText={(e) => setPassword(e) } />
         <Button title="Login" onPress={() => auth().createUserWithEmailAndPassword(email, password).then(() => {
-          console.log("User created");
+          
         }).catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             console.log('That email address is already in use!');

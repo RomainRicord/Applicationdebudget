@@ -26,8 +26,6 @@ const colorcategory_incomes2 = {
 
 export const pieIncomesChart = (expenses_array,incomes_array) => {
 
-    console.log("expenses_array",expenses_array)
-
     let category_incomes = []
     let category_expenses = []
     
@@ -44,8 +42,6 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
         const n = Math.ceil(Number(item2._data.amount.replace("€", "").replace(",", "")))
 
         category_incomes[item2._data.category] = {name:item2._data.category,amount:category_incomes[item2._data.category].amount+n,category:item2._data.category,color:colorcategory_incomes2[item2._data.category]}
-        
-        console.log(category_incomes[item2._data.category])
 
     })
     
@@ -63,8 +59,6 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
         const n = Math.ceil(Number(item2._data.amount.replace("€", "").replace(",", "")))
 
         category_expenses[item2._data.category] = {name:item2._data.category,amount:category_expenses[item2._data.category].amount+n,category:item2._data.category,color:colorcategory[item2._data.category]}
-        
-        console.log(category_expenses[item2._data.category])
 
     })
     
@@ -81,8 +75,6 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
         t.color = v.color
         t.legendFontColor = "#7F7F7F"
         t.legendFontSize = 15
-
-        console.log('push', t)
         
         line2.push(t)
     }
@@ -100,17 +92,12 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
         t.color = v.color
         t.legendFontColor = "#7F7F7F"
         t.legendFontSize = 15
-
-        console.log('push', t)
         
         line.push(t)
     }
     //console.log(date)
 
     //console.log(category)
-
-    console.log("line2",line2,"line",line)
-
     return { line2, line }
 }
 

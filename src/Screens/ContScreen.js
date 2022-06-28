@@ -35,7 +35,6 @@ const ContScreen = (props) => {
           
           {UserContext_.data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => {
             
-            console.log("DATATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",item)
             return(
                 <View key={index} style={[styles.contComponent]}>                 
                   <ContComponent style={[styles.contComponent]} comments={item._data.comments}  name={item._data.category} category={item._data.category} date={item._data.date} montant={((typeof(item._data.incomes) == "undefined") ? -Number(item._data.amount) : Number(item._data.amount))} />              

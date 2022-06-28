@@ -7,9 +7,6 @@ export const chart = (expenses_array,incomes_array) => {
     let incomes = []
     let expenses = []
 
-
-    console.log("chart",expenses_array,incomes_array)
-
     incomes_array.map((item2, index) => {             
 
         if (typeof(incomes[index]) == "undefined") {
@@ -54,8 +51,6 @@ export const chart = (expenses_array,incomes_array) => {
           },
         ],
       };
-
-      console.log("DATA = ",line.datasets[0].data)
 
     incomes.map((item, index) => {              
 

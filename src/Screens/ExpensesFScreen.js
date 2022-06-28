@@ -135,6 +135,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                                 handleSubmit()
                                 if (isValid) {
                                     addExpense(values)
+                                    setSelector(0)
                                 }
                             }}>
                                 <Text style={styles.textbutton}>Enregistrer</Text>
