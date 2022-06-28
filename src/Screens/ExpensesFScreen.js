@@ -131,6 +131,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                                 <Text style={styles.error}>{errors.comments}</Text>
                             }
                             {/* <Button label='Enregistrer' onPress={handleSubmit} /> */}
+                            
                             <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
                                 handleSubmit()
                                 if (isValid) {
@@ -140,6 +141,12 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                             }}>
                                 <Text style={styles.textbutton}>Enregistrer</Text>
                             </Pressable>
+                            <Pressable style={[styles.button,{backgroundColor:'red'}]} onPress={() => {
+                                setSelector(0)
+                            }}>
+                                <Text style={styles.textbutton}>Annuler</Text>
+                            </Pressable>
+                            
                     
                 </View >
             )}
@@ -153,7 +160,7 @@ const styles = StyleSheet.create({
     container: {
         display:'flex',
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(14,14,14)',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -180,7 +187,8 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 15,
         alignContent: 'center',
-        color:'black'
+        color:'black',
+        backgroundColor:'white',
     },
     comments: {
         height: 100,
@@ -190,13 +198,14 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 15,
         alignContent: 'center',
-        color:'black'
+        color:'black',
+        backgroundColor:'white'
     },
 
     label: {
         fontSize: 20,
         marginTop: 20,
-        color:'black',
+        color:'white',
         textAlign:'left',
         display:'flex',
         justifyContent:'flex-start',
@@ -208,7 +217,7 @@ const styles = StyleSheet.create({
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        margin:30,
+        margin:20,
         width:200
       },
       textbutton:{
