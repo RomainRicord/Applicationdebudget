@@ -1,13 +1,8 @@
 import React, {useContext} from 'react';
-import {StyleSheet, View,Dimensions,Platfrom,Text,ScrollView} from 'react-native';
+import {StyleSheet, View,Text,ScrollView} from 'react-native';
 
 import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
+    PieChart
   } from 'react-native-chart-kit'
 
 import {pieIncomesChart} from '../json/pieIncomesChart'
@@ -17,8 +12,6 @@ import ChartComponent from '../Components/ChartComponent';
 import UserContext from "../Components/UserContext";
 
 const StatScreen = (props) => {
-
-    const {userselected,setUserSelected} = props
 
     const UserContext_ = useContext(UserContext)
 

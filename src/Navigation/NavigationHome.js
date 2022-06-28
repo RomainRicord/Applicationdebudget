@@ -10,18 +10,18 @@ const Stack = createStackNavigator();
 
 const NavigationHome = (props) => {
     
-    const {selector,setSelector,userselected,setUserSelected} = props
+    const {selector,setSelector} = props
 
     return(
         <View style={{flex:1}}>
             {(selector == 0) &&
-                <HomeScreen selector={selector} setSelector={setSelector} userselected={userselected} setUserSelected={setUserSelected} />
+                <HomeScreen selector={selector} setSelector={setSelector}  />
             }
             {(selector == 1) &&
-                <ExpensesFScreen selector={selector} setSelector={setSelector} userselected={userselected} setUserSelected={setUserSelected}/>
+                <ExpensesFScreen selector={selector} setSelector={setSelector} />
             }
             {(selector == 2) &&
-                <IncomesFScreen selector={selector} setSelector={setSelector} userselected={userselected} setUserSelected={setUserSelected}/>
+                <IncomesFScreen selector={selector} setSelector={setSelector} />
             }
         </View>
     )

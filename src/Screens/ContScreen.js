@@ -1,21 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState,useEffect,useContext } from "react";
-import {  StyleSheet,  Text,  View,  Image,  TouchableOpacity,Pressable,ScrollView} from "react-native";
+import React, { useContext } from "react";
+import {  StyleSheet,  Text,  View,ScrollView} from "react-native";
 import ContComponent from "../Components/ContComponent";
 
 import UserContext from "../Components/UserContext";
 
-import firestore from '@react-native-firebase/firestore';
-
-import { GetData } from "../firebase/getdata";
-
 const ContScreen = (props) => {
-  const {userselected,setUserSelected} = props
-
-    
-  //const [data_, setdata_] = useState([])
-
-  //console.log("PROPS OF CONTSCREEN",props)
 
   const UserContext_ = useContext(UserContext)
 
@@ -45,20 +34,6 @@ const ContScreen = (props) => {
   </View>
   );
 }
-
-/*
-
-<Text>Solde: {Number(data_()[userselected]).toFixed(2)}€</Text>
-            <Text>Dépenses: {Number(individuel().expenses[userselected]).toFixed(2)}€</Text>
-            <Text>Revenus: {Number(individuel().incomes[userselected]).toFixed(2)}€</Text>
-
-{expensesandincomes().two[userselected].sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
-              <View key={index} style={[styles.contComponent]}>                 
-                <ContComponent style={[styles.contComponent]} comments={item.comments}  name={item.category} category={item.category} date={item.date} montant={((typeof(item._id_income) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
-              </View>
-            ))}
-
-            */
 
 export default ContScreen
  

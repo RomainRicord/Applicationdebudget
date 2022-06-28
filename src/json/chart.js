@@ -54,11 +54,7 @@ export const chart = (expenses_array,incomes_array) => {
 
     incomes.map((item, index) => {              
 
-        //console.log(item)
-
         item.map((item2,index2) => {
-
-            //console.log(dayjs(item2.date).locale('fr-FR').format('MM'),Math.ceil(item2.amount))
 
             let indexor = String(dayjs(item2.date).locale('fr-FR').format('MM'))
 
@@ -80,11 +76,7 @@ export const chart = (expenses_array,incomes_array) => {
 
     expenses.map((item, index) => {              
 
-        //console.log(item)
-
         item.map((item2,index2) => {
-
-            //console.log(dayjs(item2.date).locale('fr-FR').format('MM'),Math.ceil(item2.amount))
 
             let indexor = String(dayjs(item2.date).locale('fr-FR').format('MM'))
 

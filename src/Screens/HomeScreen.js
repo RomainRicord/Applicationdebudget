@@ -1,21 +1,9 @@
-import React, { useState,useEffect,useContext } from "react";
-import {  StyleSheet,  Text,  View,  Image,  TouchableOpacity,Pressable,ScrollView} from "react-native";
+import React, { useContext } from "react";
+import {  StyleSheet,  Text,  View, Pressable,ScrollView} from "react-native";
 import TransactionComponent from "../Components/TransactionComponent";
-//import UserListComponent from "../Components/UserListComponent";
-
-//import {data_} from "../json/data";
-
-//import {expensesandincomes} from '../json/expensesandincomes'
-
-import { createStackNavigator } from '@react-navigation/stack';
 
 import UserContext from "../Components/UserContext";
-
-import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-
-import { GetData } from "../firebase/getdata";
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
@@ -47,21 +35,11 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
                 <TransactionComponent name={item._data.category} category={item._data.category} date={item._data.date} montant={((typeof(item._data.incomes) == "undefined") ? -Number(item._data.amount) : Number(item._data.amount))} />              
               </View>
           )})}
-            
           
         </ScrollView>
   </View>
   );
 }
-
-/*
-
-{firestore().collection('Users').get().sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
-              <View key={index}>                 
-                <TransactionComponent name={item.category} category={item.category} date={item.date} montant={((typeof(item._id_income) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
-              </View>
-            ))}
-*/
 
 export default HomeScreen
  

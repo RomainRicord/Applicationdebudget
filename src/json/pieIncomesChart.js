@@ -33,11 +33,7 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
 
         if (typeof (category_incomes[item2._data.category]) == "undefined") {
             category_incomes[item2._data.category] = {amount:0,category:item2._data.category,color:colorcategory_incomes2[item2._data.category]}
-            //console.log("Category " + item2.category + " is undefined")
-            
         }
-
-        //console.log("Inscription", item2.date, Number(item2.amount.replace("€", "").replace(",", "")), index)
 
         const n = Math.ceil(Number(item2._data.amount.replace("€", "").replace(",", "")))
 
@@ -50,11 +46,7 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
 
         if (typeof (category_expenses[item2._data.category]) == "undefined") {
             category_expenses[item2._data.category] = {amount:0,category:item2._data.category,color:colorcategory[item2._data.category]}
-            //console.log("Category " + item2.category + " is undefined")
-            
         }
-
-        //console.log("Inscription", item2.date, Number(item2.amount.replace("€", "").replace(",", "")), index)
 
         const n = Math.ceil(Number(item2._data.amount.replace("€", "").replace(",", "")))
 
@@ -67,8 +59,6 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
     for (const [k,v] of Object.entries(category_expenses)) {
 
         let t = {}
-
-        //console.log("Inscription", item, index)
 
         t.name = v.category
         t.amount = v.amount
@@ -85,8 +75,6 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
 
         let t = {}
 
-        //console.log("Inscription", item, index)
-
         t.name = v.category
         t.amount = v.amount
         t.color = v.color
@@ -95,9 +83,7 @@ export const pieIncomesChart = (expenses_array,incomes_array) => {
         
         line.push(t)
     }
-    //console.log(date)
 
-    //console.log(category)
     return { line2, line }
 }
 

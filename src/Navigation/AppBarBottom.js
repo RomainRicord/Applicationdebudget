@@ -1,19 +1,15 @@
 import * as React from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import HomeScreen from '../Screens/HomeScreen';
 
 import StatScreen from '../Screens/StatScreen';
 import ContScreen from '../Screens/ContScreen';
 import NavigationHome from './NavigationHome'
-
-import auth from '@react-native-firebase/auth';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const AppBarBottom = () => {
 
-    const [userselected, setUserSelected] = React.useState(0)
     const [selector,setSelector] = React.useState(0)
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
@@ -22,9 +18,9 @@ const AppBarBottom = () => {
         { key: 'stat', title: 'Statistiques', focusedIcon: 'chart-bar', unfocusedIcon: 'chart-bar'}
     ]);
 
-    const HomeRoute = () => <NavigationHome selector={selector} setSelector={setSelector} userselected={userselected} setUserSelected={setUserSelected} />
-    const AccountRoute = () => <ContScreen userselected={userselected} setUserSelected={setUserSelected}/>
-    const StatRoute = () => <StatScreen userselected={userselected} setUserSelected={setUserSelected} />
+    const HomeRoute = () => <NavigationHome selector={selector} setSelector={setSelector}  />
+    const AccountRoute = () => <ContScreen />
+    const StatRoute = () => <StatScreen  />
 
     const renderScene = BottomNavigation.SceneMap({
         home: HomeRoute,

@@ -27,16 +27,12 @@ export const data_ = () => {
                 revenuuser[index] = 0
             }
 
-            //console.log("MOINS")
-
             revenuuser[index] = Number(revenuuser[index]) - Number(item2.amount.replace("€","").replace(",",""))
 
           }
   
         })
     })
-
-    //console.log("Test",revenuuser)
 
     return revenuuser
 }

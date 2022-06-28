@@ -1,7 +1,7 @@
 import React,{useContext} from 'react';
-import {StyleSheet, View,Dimensions,SafeAreaView,Text} from 'react-native';
+import {StyleSheet, Dimensions,SafeAreaView,Text} from 'react-native';
 
-import {  LineChart,   BarChart,  PieChart,  ProgressChart, ContributionGraph, StackedBarChart} from 'react-native-chart-kit'
+import { BarChart} from 'react-native-chart-kit'
 
 import {chart} from '../json/chart'
 import UserContext from "./UserContext";

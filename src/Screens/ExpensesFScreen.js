@@ -1,25 +1,15 @@
 import React, { useState,useContext } from 'react'
-import { Button, TextInput, View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { Formik, useFormik } from 'formik';
+import {TextInput, View, Text, StyleSheet, Pressable } from 'react-native';
+import { Formik } from 'formik';
 import dayjs from 'dayjs';
-
-//import { Picker } from 'react-native-web';
 import * as Yup from 'yup';
 import { Dimensions } from 'react-native';
 import UserContext from "../Components/UserContext";
 import firestore from '@react-native-firebase/firestore';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const ExpensesFScreen = ({setSelector}) => {
 
-const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) => {
-     const [user, setUser] = useState('')
-    // const [amount, setAmount] = useState('')
-    // const [date, setDate] = useState(new Date())
-     const [category, setCategory] = useState('')
-    // const [comments, setComments] = useState('')
     const UserContext_ = useContext(UserContext)
-    const UserList = []
 
     const addExpense = async ({amount,date,category,comments}) => {
         await firestore().collection('Users').doc(UserContext_.user.uid).collection('expenses').add({
@@ -71,15 +61,6 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
         category: '',
         comments: ''
     }
-    /*
-    const {values, handleBlur, handleChange, handleSubmit} = useFormik ({
-        initialValues: { initialValues },
-        validationSchema: validationIncomes,
-        //onSubmit: values => alert(values)
-        onSubmit:{handleSubmit}
-    });*/
-
-
 
     return (
         
@@ -105,7 +86,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                             <Text style={styles.label}>Date</Text>
                             <TextInput
                                 style={styles.input}
-                                // value={dayjs(date).format('DD/MM/YYYY')}
+                                
                                 onChangeText={handleChange('date')}
                                 onBlur={handleBlur('date')}
                                 placeholder="JJ/MM/AAAA"
@@ -130,9 +111,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
                             />
                             {errors.comments &&
                                 <Text style={styles.error}>{errors.comments}</Text>
-                            }
-                            {/* <Button label='Enregistrer' onPress={handleSubmit} /> */}
-                            
+                            }                           
                             <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
                                 handleSubmit()
                                 if (isValid) {
