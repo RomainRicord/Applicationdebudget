@@ -19,7 +19,7 @@ const AppBarBottom = () => {
     const [routes] = React.useState([
         { key: 'home', title: 'Accueil', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
         { key: 'account', title: 'Compte', focusedIcon: 'currency-eur', unfocusedIcon: 'currency-eur' },
-        { key: 'stat', title: 'Statistiques', icon: 'chart-bar'}
+        { key: 'stat', title: 'Statistiques', focusedIcon: 'chart-bar', unfocusedIcon: 'chart-bar'}
     ]);
 
     const HomeRoute = () => <NavigationHome selector={selector} setSelector={setSelector} userselected={userselected} setUserSelected={setUserSelected} />

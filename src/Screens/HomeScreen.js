@@ -12,8 +12,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import UserContext from "../Components/UserContext";
 
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 import { GetData } from "../firebase/getdata";
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
@@ -21,7 +24,12 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
   return (
   <View style={styles.container}>
-        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center',color:'white'}}>Welcome {UserContext_.user.email}!</Text>
+        <View style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'row',marginTop:40,marginBottom:20}}>
+          <Pressable style={{display:'flex',justifyContent:'center',alignItems:'center',height:32,width:32,marginRight:20}} onPress={() => {auth().signOut()}}>
+            <Icon name="account-arrow-left" size={32} color="white" />
+          </Pressable>
+          <Text style={{fontSize:20,textAlign:'center',color:'white',width:200}}>Welcome {UserContext_.user.email.split("@")[0]} !</Text>
+        </View>
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <Pressable style={[styles.button,{backgroundColor:'green'}]} onPress={() => {setSelector(2)}}>
             <Text style={styles.textbutton}>Revenu</Text>
