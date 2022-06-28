@@ -31,6 +31,7 @@ const ExpensesFScreen = ({selector,setSelector,userselected,setUserSelected}) =>
             expense:true
         }).then(() => {
             console.log('expenses added!');
+            UserContext_.SetSolde_(UserContext_.user.uid)
         }).catch(error => {
             console.log(error);
         })

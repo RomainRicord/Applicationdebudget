@@ -99,7 +99,7 @@ const App = () => {
   }
 
   return (
-    <UserContext.Provider value={{user,expenses, incomes, solde, expenses_array, incomes_array, data_ }}>
+    <UserContext.Provider value={{user,expenses, incomes, solde, expenses_array, incomes_array, data_,SetSolde_ }}>
       <AppBarBottom />
     </UserContext.Provider>
   );
