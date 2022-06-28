@@ -7,14 +7,11 @@ import UserContext from "../Components/UserContext";
 
 import firestore from '@react-native-firebase/firestore';
 
+import { GetData } from "../firebase/getdata";
+
 const ContScreen = (props) => {
   const {userselected,setUserSelected} = props
-  const [expenses, setexpenses] = useState(0)
-  const [incomes, setincomes] = useState(0)
-  const [solde,setSolde] = useState(0)
-  const [expenses_array, setexpenses_array] = useState([])
-  const [incomes_array, setincomes_array] = useState([])
-  const [data_, setdata_] = useState([])
+
     
   //const [data_, setdata_] = useState([])
 
@@ -22,117 +19,21 @@ const ContScreen = (props) => {
 
   const UserContext_ = useContext(UserContext)
 
-  const GetData = async () => {
-
-    setexpenses_array([])
-    setincomes_array([])
-    setdata_([])
-    setSolde(0)
-    setexpenses(0)
-    setincomes(0)
-
-    await firestore()
-    .collection('Users')
-    .doc(UserContext_.user.uid)
-    .collection('expenses')
-    .get()
-    .then(documentSnapshot => {
-
-      let expenses_n = 0
-
-      if (documentSnapshot != null) {
-
-        console.log( "EXPENSES",typeof(documentSnapshot) ,documentSnapshot )
-
-        console.log("EXPENSES DATA",documentSnapshot._docs)
-
-        for (let i = 0; i < documentSnapshot._docs.length; i++) {
-          
-          expenses_n = expenses_n + Number(documentSnapshot._docs[i].data().amount)
-          setexpenses(expenses_n)
-          
-          console.log("Dépenses",expenses_n,expenses)
-          
-        }
-
-        /*
-        console.log( "EXPENSES",typeof(documentSnapshot) ,documentSnapshot )
-        setexpenses_array(documentSnapshot._docs)
-
-        for (let i = 0; i < documentSnapshot._docs.length; i++) {
-          console.log("Dépenses",documentSnapshot._docs[i].data().amount,expenses)
-          setexpenses(expenses+documentSnapshot._docs[i].data().amount)
-          setSolde(solde-documentSnapshot._docs[i].data().amount)
-        }
-        */
-
-      } else {
-        console.log(" Document does not exist ");
-      }
-
-    })
-
-    await firestore()
-    .collection('Users')
-    .doc(UserContext_.user.uid)
-    .collection('incomes')
-    .get()
-    .then(documentSnapshot => {
-
-      let incomes_n = 0
-
-      if (documentSnapshot != null) {
-        console.log( "INCOMES",typeof(documentSnapshot) ,documentSnapshot )
-
-        console.log("INCOMES DATA",documentSnapshot._docs)
-
-        for (let i = 0; i < documentSnapshot._docs.length; i++) {
-          
-          incomes_n = incomes_n + Number(documentSnapshot._docs[i].data().amount)
-          setincomes(incomes_n)
-         
-          console.log("Revenus",incomes_n,incomes)
-          
-        }
-      } else {
-        console.log(" Document does not exist ");
-      }
-
-    })
-
-    setdata_(expenses_array.concat(incomes_array))
-    console.log("SET SOLDE !!!!",incomes-expenses,incomes,expenses)
-    setSolde(incomes-expenses)
-
-  }
-
-  const SetSolde_ = async () => {
-
-    console.log("SET SOLDE !!!!",incomes-expenses,incomes,expenses)
-    setSolde(incomes-expenses)
-
-  }
-
-  useEffect(() => {
-    GetData()
-    SetSolde_()
-  }, [UserContext_.user.uid]);
-
   return (
   <View style={styles.container}>
         <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {UserContext_.user.email}!</Text>
         
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <Text style={{color:'black'}}>Solde: {solde}€</Text>
-            <Text style={{color:'black'}}>Dépenses: {expenses}€</Text>
-            <Text style={{color:'black'}}>Revenus: {incomes}€</Text>
+            <Text style={{color:'black'}}>Solde: {UserContext_.solde}€</Text>
+            <Text style={{color:'black'}}>Dépenses: {UserContext_.expenses}€</Text>
+            <Text style={{color:'black'}}>Revenus: {UserContext_.incomes}€</Text>
           </View>
           
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-          {data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => {
+          {UserContext_.data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => {
             
             console.log("DATATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",item)
             return(

@@ -11,6 +11,8 @@ import firestore from '@react-native-firebase/firestore';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+import  {Provider as PaperProvider} from 'react-native-paper';
+
 const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => {
      const [user, setUser] = useState('')
     // const [amount, setAmount] = useState('')
@@ -39,7 +41,7 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
             category: category,
             comments: comments,
             user:UserContext_.user.uid,
-            expense:true
+            incomes:true
         }).then(() => {
             console.log('expenses added!');
         }).catch(error => {
@@ -94,6 +96,7 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
                                 onChangeText={handleChange('amount')}
                                 onBlur={handleBlur('amount')}
                                 keyboardType="number-pad"
+                                
                             />
                             {errors.amount &&
                                 <Text style={styles.error}>{errors.amount}</Text>
@@ -105,6 +108,7 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
                                 onChangeText={handleChange('date')}
                                 onBlur={handleBlur('date')}
                                 placeholder="JJ/MM/AAAA"
+                                
                             />
                             {errors.date &&
                                 <Text style={styles.error}>{errors.date}</Text>
@@ -114,6 +118,7 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
                                 style={styles.comments}                           
                                 onChangeText={handleChange('category')}
                                 onBlur={handleBlur('category')}
+                                
                             />
                             {errors.category &&
                                 <Text style={styles.error}>{errors.category}</Text>
@@ -132,6 +137,7 @@ const IncomesFScreen = ({selector,setSelector,userselected,setUserSelected}) => 
                                 handleSubmit()
                                 if (isValid) {
                                     addIncomes(values)
+                                    setSelector(0)
                                 }
                             }}>
                                 <Text style={styles.textbutton}>Enregistrer</Text>
@@ -175,7 +181,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderRadius: 15,
-        alignContent: 'center'
+        alignContent: 'center',
+        color:'black'
     },
     comments: {
         height: 100,
@@ -184,12 +191,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderRadius: 15,
-        alignContent: 'center'
+        alignContent: 'center',
+        color:'black'
     },
 
     label: {
         fontSize: 20,
         marginTop: 20,
+        color:'black',
         textAlign:'left',
         display:'flex',
         justifyContent:'flex-start',

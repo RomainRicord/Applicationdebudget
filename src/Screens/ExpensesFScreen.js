@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderRadius: 15,
-        alignContent: 'center'
+        alignContent: 'center',
+        color:'black'
     },
     comments: {
         height: 100,
@@ -187,12 +188,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderRadius: 15,
-        alignContent: 'center'
+        alignContent: 'center',
+        color:'black'
     },
 
     label: {
         fontSize: 20,
         marginTop: 20,
+        color:'black',
         textAlign:'left',
         display:'flex',
         justifyContent:'flex-start',

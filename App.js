@@ -6,6 +6,10 @@ import auth from '@react-native-firebase/auth';
 
 import UserContext from './src/Components/UserContext';
 
+import firestore from '@react-native-firebase/firestore';
+
+import { GetData } from "./src/firebase/getdata";
+
 const App = () => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
@@ -13,14 +17,42 @@ const App = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const [expenses, setexpenses] = useState(0)
+  const [incomes, setincomes] = useState(0)
+  const [solde,setSolde] = useState(0)
+  const [expenses_array, setexpenses_array] = useState([])
+  const [incomes_array, setincomes_array] = useState([])
+  const [data_, setdata_] = useState([])
+
+  const SetSolde_ = async (uid) => {
+
+    await GetData(uid).then(data => {
+      console.log("GetData",data)
+      setexpenses(data.expense__)
+      setincomes(data.incomes__)
+      setexpenses_array(data.expenses__array)
+      setincomes_array(data.incomes__array)
+      setdata_(data.expenses__array.concat(data.incomes__array))
+      setSolde(data.solde__)
+    }).catch(error => {
+      console.log("Error getting documents: ", error);
+    })
+
+  }
 
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
+    SetSolde_(user.uid)
     if (initializing) setInitializing(false);
   }
 
   useEffect(() => {
+
+    if (typeof(user) != "undefined"){
+      SetSolde_()
+    }
+
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
@@ -60,7 +92,7 @@ const App = () => {
   }
 
   return (
-    <UserContext.Provider value={{user:user}}>
+    <UserContext.Provider value={{user,expenses, incomes, solde, expenses_array, incomes_array, data_ }}>
       <AppBarBottom />
     </UserContext.Provider>
   );

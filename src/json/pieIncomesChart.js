@@ -24,56 +24,49 @@ const colorcategory_incomes2 = {
     "Autre revenu":"#85db0d"
 }
 
-export const pieIncomesChart = (userselected) => {
+export const pieIncomesChart = (expenses_array,incomes_array) => {
 
     let category_incomes = []
     let category_expenses = []
-
-
-    console.log("init pieIncomesChart",userselected,data[userselected])
-
     
-    data[userselected].incomes.map((item2, index2) => {
+    incomes_array.map((item2, index2) => {
 
-        if (typeof (category_incomes[item2.category]) == "undefined") {
-            category_incomes[item2.category] = {amount:0,category:item2.category,color:colorcategory_incomes2[item2.category]}
+        if (typeof (category_incomes[item2._data.category]) == "undefined") {
+            category_incomes[item2._data.category] = {amount:0,category:item2._data.category,color:colorcategory_incomes2[item2._data.category]}
             //console.log("Category " + item2.category + " is undefined")
             
         }
 
         //console.log("Inscription", item2.date, Number(item2.amount.replace("€", "").replace(",", "")), index)
 
-        const n = Math.ceil(Number(item2.amount.replace("€", "").replace(",", "")))
+        const n = Math.ceil(Number(item2._data.amount.replace("€", "").replace(",", "")))
 
-        category_incomes[item2.category] = {name:item2.category,amount:category_incomes[item2.category].amount+n,category:item2.category,color:colorcategory_incomes2[item2.category]}
+        category_incomes[item2._data.category] = {name:item2._data.category,amount:category_incomes[item2._data.category].amount+n,category:item2._data.category,color:colorcategory_incomes2[item2._data.category]}
         
-        console.log(category_incomes[item2.category])
+        console.log(category_incomes[item2._data.category])
 
     })
     
     
-    data[userselected].expenses.map((item2, index2) => {
+    expenses_array.map((item2, index2) => {
 
-        if (typeof (category_expenses[item2.category]) == "undefined") {
-            category_expenses[item2.category] = {amount:0,category:item2.category,color:colorcategory[item2.category]}
+        if (typeof (category_expenses[item2._data.category]) == "undefined") {
+            category_expenses[item2._data.category] = {amount:0,category:item2._data.category,color:colorcategory[item2._data.category]}
             //console.log("Category " + item2.category + " is undefined")
             
         }
-    
+
         //console.log("Inscription", item2.date, Number(item2.amount.replace("€", "").replace(",", "")), index)
-    
-        const n = Math.ceil(Number(item2.amount.replace("€", "").replace(",", "")))
-    
-        category_expenses[item2.category] = {name:item2.category,amount:category_expenses[item2.category].amount+n,category:item2.category,color:colorcategory[item2.category]}
+
+        const n = Math.ceil(Number(item2._data.amount.replace("€", "").replace(",", "")))
+
+        category_expenses[item2._data.category] = {name:item2._data.category,amount:category_expenses[item2._data.category].amount+n,category:item2._data.category,color:colorcategory[item2._data.category]}
         
-        console.log(category_expenses[item2.category])
-    
+        console.log(category_expenses[item2._data.category])
+
     })
     
     let line2 = []
-
-    console.log("entries",userselected)
-
 
     for (const [k,v] of Object.entries(category_expenses)) {
 
@@ -93,9 +86,6 @@ export const pieIncomesChart = (userselected) => {
     }
     
     let line = []
-
-    console.log("entries",userselected)
-
 
     for (const [k,v] of Object.entries(category_incomes)) {
 

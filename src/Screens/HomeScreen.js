@@ -14,58 +14,15 @@ import UserContext from "../Components/UserContext";
 
 import firestore from '@react-native-firebase/firestore';
 
-const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
+import { GetData } from "../firebase/getdata";
 
-  const [expenses, setexpenses] = useState([])
-  const [incomes, setincomes] = useState([])
-  const [data_, setdata_] = useState([])
+const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
 
   const UserContext_ = useContext(UserContext)
 
-  const GetData = async () => {
-
-    await firestore()
-    .collection('Users')
-    .doc(UserContext_.user.uid)
-    .collection('expenses')
-    .onSnapshot(documentSnapshot => {
-
-      if (documentSnapshot != null) {
-        console.log( typeof(documentSnapshot) ,documentSnapshot )
-        setexpenses(documentSnapshot._docs)
-      } else {
-        console.log(" Document does not exist ");
-      }
-
-    })
-
-    await firestore()
-    .collection('Users')
-    .doc(UserContext_.user.uid)
-    .collection('incomes')
-    .onSnapshot(documentSnapshot => {
-
-      if (documentSnapshot != null) {
-        console.log( typeof(documentSnapshot) ,documentSnapshot )
-        setincomes(documentSnapshot._docs)
-      } else {
-        console.log(" Document does not exist ");
-      }
-
-    })
-
-    setdata_(expenses.concat(incomes))
-
-  }
-
-
-  useEffect(() => {
-    GetData()
-  }, [UserContext_.user.uid]);
-
   return (
   <View style={styles.container}>
-        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center'}}>Welcome {UserContext_.user.email}!</Text>
+        <Text style={{fontSize:20,marginTop:40,marginBottom:20,textAlign:'center',color:'black'}}>Welcome {UserContext_.user.email}!</Text>
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <Pressable style={[styles.button,{backgroundColor:'green'}]} onPress={() => {setSelector(2)}}>
             <Text style={styles.textbutton}>Revenu</Text>
@@ -76,11 +33,15 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-        {data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => (
+        {UserContext_.data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => {
+          
+          
+          console.log("DATA__",item._data)
+          return(
               <View key={index}>                 
-                <TransactionComponent name={item.category} category={item.category} date={item.date} montant={((typeof(item.incomes) == "undefined") ? -Number(item.amount.replace("€","").replace(",","")) : Number(item.amount.replace("€","").replace(",","")))} />              
+                <TransactionComponent name={item._data.category} category={item._data.category} date={item._data.date} montant={((typeof(item._data.incomes) == "undefined") ? -Number(item._data.amount) : Number(item._data.amount))} />              
               </View>
-          ))}
+          )})}
             
           
         </ScrollView>
