@@ -53,7 +53,7 @@ const App = () => {
   useEffect(() => {
 
     if (typeof(user) != "undefined"){
-      SetSolde_()
+      SetSolde_(user.uid)
     }
 
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
