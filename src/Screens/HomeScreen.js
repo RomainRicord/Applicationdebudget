@@ -30,7 +30,7 @@ const HomeScreen = ({selector,setSelector,userselected,setUserSelected}) => {
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-        {UserContext_.data_.sort((a,b) => new Date(dayjs(b.date).format('DD/MM/YYYY') == "Invalid Date" ? dayjs(b.date).format('DD/MM/YYYY') : b.date) - new Date(dayjs(a.date).format('DD/MM/YYYY') == "Invalid Date" ? dayjs(a.date).format('DD/MM/YYYY') : a.date)).map((item, index) => {
+        {UserContext_.data_.sort((a,b) => new Date(b._data.date) - new Date(a._data.date).map((item, index) => {
           
           return(
               <View key={index}>                 
