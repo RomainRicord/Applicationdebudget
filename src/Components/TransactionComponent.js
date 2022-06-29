@@ -6,7 +6,9 @@ const TransactionComponent = (props) => {
 
     const {name,category,date,montant} = props
 
-    let date_ = dayjs(date).locale('fr-FR').format('DD/MM/YYYY')
+    let date_ = dayjs(date).format('DD/MM/YYYY')
+
+    console.log("Date",date_,date)
 
     return(
     <View style={{display:'flex',justifyContent:'space-between',margin:20,height:50,flexDirection:'row',alignItems:'center'}}>

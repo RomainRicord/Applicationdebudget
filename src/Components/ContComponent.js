@@ -6,7 +6,7 @@ const ContComponent = (props) => {
 
     const {name,category,date,montant,comments} = props
 
-    let date_ = dayjs(date).locale('fr-FR').format('DD/MM/YYYY')
+    let date_ = dayjs(date).format('DD/MM/YYYY')
 
     return(
     <View style={[styles.container]}>
