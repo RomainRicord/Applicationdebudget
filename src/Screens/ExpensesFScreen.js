@@ -71,8 +71,9 @@ const ExpensesFScreen = ({setSelector}) => {
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
             {({ handleChange, handleBlur, handleSubmit, values,errors,isValid }) => (
-                <View style={styles.container}>
-                    <ScrollView style={{flex:1}}>
+                
+                <ScrollView style={{flex:1}}>
+                    <View style={styles.container}>
                         <Text style={styles.title}>Ajout Dépenses</Text>
                         <Text style={styles.label}>Montant</Text>
                         <TextInput
@@ -128,8 +129,8 @@ const ExpensesFScreen = ({setSelector}) => {
                             <Text style={styles.textbutton}>Annuler</Text>
                         </Pressable>
                             
-                    </ScrollView>
-                </View >
+                    </View>
+                </ScrollView >
             )}
         </Formik>
         
