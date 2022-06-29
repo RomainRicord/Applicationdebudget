@@ -14,9 +14,9 @@ const ContScreen = (props) => {
         
         <View style={{display:'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <Text style={{color:'white'}}>Solde: {Number(UserContext_.solde).ToFixed(2)}€</Text>
-            <Text style={{color:'white'}}>Dépenses: {Number(UserContext_.expenses).ToFixed(2)}€</Text>
-            <Text style={{color:'white'}}>Revenus: {Number(UserContext_.incomes).ToFixed(2)}€</Text>
+            <Text style={{color:'white'}}>Solde: {Number(UserContext_.solde).toFixed(2)}€</Text>
+            <Text style={{color:'white'}}>Dépenses: {Number(UserContext_.expenses).toFixed(2)}€</Text>
+            <Text style={{color:'white'}}>Revenus: {Number(UserContext_.incomes).toFixed(2)}€</Text>
           </View>
           
         </View>
