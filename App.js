@@ -132,8 +132,8 @@ const App = () => {
       <View style={styles.container}>
         <View style={{display:'flex',marginBottom:20,justifyContent:'center',alignItems:'center'}}>
           <Text style={[styles.text,{marginBottom:20}]}>Connectez-vous par adresse email</Text>
-          <TextInput style={styles.textInput} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
-          <TextInput style={[styles.textInput,{marginBottom:20}]} placeholder="Password" secureTextEntry={true} onChangeText={(e) => setPassword(e) } />
+          <TextInput style={styles.textInput} placeholder="Email" value={email}  onChangeText={(e) => setEmail(e) } />
+          <TextInput style={[styles.textInput,{marginBottom:20}]} value={password} placeholder="Password" secureTextEntry={true} onChangeText={(e) => setPassword(e) } />
           <Button title="Se connecter" onPress={() => auth().signInWithEmailAndPassword(email, password).catch(error => setErrorMessage(error.message) )} />
 
           {errorMessage && <Text style={{color:'red'}}>{errorMessage}</Text>}
