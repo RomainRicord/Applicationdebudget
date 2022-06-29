@@ -12,7 +12,7 @@ const ContComponent = (props) => {
     <View style={[styles.container]}>
 
         <Text style={{fontWeight:'bold',color:montant < 0 ? "red" : "green"}}>{montant < 0 && "-" }{montant > 0 && "+" } {Math.abs(montant)} €</Text>
-        <Text>Date: {date_}</Text>
+        <Text style={{color:'white'}}>Date: {date_}</Text>
         <Text style={{fontWeight:'bold',color:'white'}}>Categorie: {category}</Text>
 
         <View style={{display:'flex',flexDirection:'column'}}>
