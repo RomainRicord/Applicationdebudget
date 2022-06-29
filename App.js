@@ -68,7 +68,7 @@ const App = () => {
         <View style={{display:'flex',marginBottom:20,justifyContent:'center',alignItems:'center'}}>
           <Text style={[styles.text,{marginBottom:20}]}>Connectez-vous par adresse email</Text>
           <TextInput style={styles.textInput} placeholder="Email"  onChangeText={(e) => setEmail(e) } />
-          <TextInput style={[styles.textInput,{marginBottom:20}]} placeholder="Password" onChangeText={(e) => setPassword(e) } />
+          <TextInput style={[styles.textInput,{marginBottom:20}]} placeholder="Password" secureTextEntry={true} onChangeText={(e) => setPassword(e) } />
           <Button title="Se connecter" onPress={() => auth().signInWithEmailAndPassword(email, password).catch(error => setErrorMessage(error.message) )} />
 
           {errorMessage && <Text style={{color:'red'}}>{errorMessage}</Text>}
@@ -77,7 +77,7 @@ const App = () => {
         <View style={{display:'flex',marginTop:20,justifyContent:'center',alignItems:'center'}}>
           <Text style={[styles.text,{marginBottom:20}]}>Enregistrez-vous par adresse email</Text>
           <TextInput style={styles.textInput} value={email_} placeholder="Email"  onChangeText={(e) => setEmail_(e) } />
-          <TextInput style={[styles.textInput,{marginBottom:20}]} value={password_} placeholder="Password" onChangeText={(e) => setPassword_(e) } />
+          <TextInput style={[styles.textInput,{marginBottom:20}]} value={password_} secureTextEntry={true} placeholder="Password" onChangeText={(e) => setPassword_(e) } />
           <Button title="S'inscrire" onPress={() => auth().createUserWithEmailAndPassword(email_, password_).then(() => {
             
           }).catch(error => {
