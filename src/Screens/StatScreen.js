@@ -45,7 +45,7 @@ const StatScreen = (props) => {
             {pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line.map((item,index) => {
               return(
                 <View key={index} style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                  <View style={{backgroundColor:item.color,width:20,height:20,borderRadius:40,marginRight:10}}></View><Text style={{fontSize:20}}>{item.name} -> {item.amount}€</Text>
+                  <View style={{backgroundColor:item.color,width:20,height:20,borderRadius:40,marginRight:10}}></View><Text style={{fontSize:20,color:'white'}}>{item.name} -> {item.amount}€</Text>
                 </View>
               )
             })}
@@ -78,7 +78,7 @@ const StatScreen = (props) => {
             {pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line2.map((item,index) => {
               return(
                 <View key={index} style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                  <View style={{backgroundColor:item.color,width:20,height:20,borderRadius:40,marginRight:10}}></View><Text style={{fontSize:20}}>{item.name} -> {item.amount}€</Text>
+                  <View style={{backgroundColor:item.color,width:20,height:20,borderRadius:40,marginRight:10}}></View><Text style={{fontSize:20,color:'white'}}>{item.name} -> {item.amount}€</Text>
                 </View>
               )
             })}
