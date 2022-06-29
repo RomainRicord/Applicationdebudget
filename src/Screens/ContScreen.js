@@ -22,7 +22,25 @@ const ContScreen = (props) => {
         </View>
         <ScrollView style={{height:300,marginTop:20,marginBottom:40,flex:1,display:'flex'}}>
           
-          {UserContext_.data_.sort((a,b) => new Date(b.date) - new Date(a.date)).map((item, index) => {
+          {UserContext_.data_.sort((a,b) => { 
+          
+          console.log("Try date",(new Date(b._data.date)),(new Date(a._data.date)),a._data.date,b._data.date,a,b)
+
+          let date1 = new Date(a._data.date)
+          let date2 = new Date(b._data.date)
+
+          if (a._data.date.split("/")[0] >= 13) {
+            date1 = new Date(a._data.date.split("/")[1]+"/"+a._data.date.split("/")[0]+"/"+a._data.date.split("/")[2])
+          }
+
+          if (b._data.date.split("/")[0] >= 13) {
+            date2 = new Date(b._data.date.split("/")[1]+"/"+b._data.date.split("/")[0]+"/"+b._data.date.split("/")[2])
+          }
+
+          return(date2 - date1)
+        
+        
+        }).map((item, index) => {
             
             return(
                 <View key={index} style={[styles.contComponent]}>                 
