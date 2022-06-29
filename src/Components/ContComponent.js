@@ -8,6 +8,10 @@ const ContComponent = (props) => {
 
     let date_ = dayjs(date).format('DD/MM/YYYY')
 
+    if (date_ == "Invalid Date") {
+        date_ = date
+    }
+
     return(
     <View style={[styles.container]}>
 

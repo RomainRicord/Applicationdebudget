@@ -8,6 +8,10 @@ const TransactionComponent = (props) => {
 
     let date_ = dayjs(date).format('DD/MM/YYYY')
 
+    if (date_ == "Invalid Date") {
+        date_ = date
+    }
+
     console.log("Date",date_,date)
 
     return(
