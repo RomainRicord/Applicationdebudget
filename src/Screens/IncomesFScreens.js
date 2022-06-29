@@ -73,7 +73,7 @@ const IncomesFScreen = ({setSelector}) => {
         >
             {({ handleChange, handleBlur, handleSubmit, values,errors,isValid }) => (
                 <View style={styles.container}>
-                    <ScrollView>
+                    <ScrollView style={{flex:1}}>
                         <Text style={styles.title}>Ajout Revenus</Text>
                         <Text style={styles.label}>Montant</Text>
                         <TextInput

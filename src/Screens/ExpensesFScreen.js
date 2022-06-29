@@ -1,5 +1,5 @@
 import React, { useState,useContext } from 'react'
-import {TextInput, View, Text, StyleSheet, Pressable } from 'react-native';
+import {TextInput, View, Text, StyleSheet, Pressable,ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import dayjs from 'dayjs';
 import * as Yup from 'yup';
@@ -72,7 +72,7 @@ const ExpensesFScreen = ({setSelector}) => {
         >
             {({ handleChange, handleBlur, handleSubmit, values,errors,isValid }) => (
                 <View style={styles.container}>
-                    <ScrollView>
+                    <ScrollView style={{flex:1}}>
                         <Text style={styles.title}>Ajout Dépenses</Text>
                         <Text style={styles.label}>Montant</Text>
                         <TextInput
