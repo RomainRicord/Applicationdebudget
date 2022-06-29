@@ -9,6 +9,7 @@ import UserContext from './src/Components/UserContext';
 import firestore from '@react-native-firebase/firestore';
 
 import { GetData } from "./src/firebase/getdata";
+import dayjs from 'dayjs';
 
 const App = () => {
   // Set an initializing state whilst Firebase connects
@@ -39,6 +40,70 @@ const App = () => {
       console.log("Error getting documents: ", error);
     })
 
+  }
+
+  const godata = async () => {
+
+    const file = require('./data.json')
+
+    let users = []
+
+    await file.map(async (item) => {
+
+      await auth().signInWithEmailAndPassword(item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr", item.user.split(" ")[0].toLowerCase()).then((user_) => {
+        console.log("Utilisateur créer",item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr",user_.user.uid)
+        
+        users[item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr"] = user_.user.uid
+      
+      }).catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+    
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+    
+        console.error(error);
+      })
+
+      item.incomes.map(async (item2) => {
+
+        await firestore().collection('Users').doc(users[item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr"]).collection('incomes').add({
+          amount: item2.amount.replace('€','').replace(',',''),
+          date: dayjs(item2.date).locale('fr-FR').format('DD/MM/YYYY'),
+          category: item2.category,
+          comments: item2.comments,
+          user:users[item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr"],
+          incomes:true
+        }).then(() => {
+            console.log('incomes added!');
+            
+        }).catch(error => {
+            console.log(error);
+        })
+
+      })
+
+      item.expenses.map( async (item2) => {
+
+        await firestore().collection('Users').doc(users[item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr"]).collection('expenses').add({
+          amount: item2.amount.replace('€','').replace(',',''),
+          date: dayjs(item2.date).locale('fr-FR').format('DD/MM/YYYY'),
+          category: item2.category,
+          comments: item2.comments,
+          user:users[item.user.split(" ")[0].toLowerCase()+"@"+item.user.split(" ")[1]+".fr"],
+          expense:true
+        }).then(() => {
+            console.log('expenses added!');
+            
+        }).catch(error => {
+            console.log(error);
+        })
+
+      })
+
+    })
   }
 
   // Handle user state changes
@@ -94,6 +159,8 @@ const App = () => {
           
           } />
         </View>
+
+        
       </View>
     );
   }
@@ -104,6 +171,13 @@ const App = () => {
     </UserContext.Provider>
   );
 }
+
+/*
+<Button title="Add json Data" onPress={() => {
+          godata()
+
+        }} />
+*/
 
 const styles = StyleSheet.create({
   container: {
