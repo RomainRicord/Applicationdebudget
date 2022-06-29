@@ -52,7 +52,7 @@ const App = () => {
 
   useEffect(() => {
 
-    if (typeof(user) != "undefined"){
+    if (user != null){
       SetSolde_(user.uid)
     }
 
