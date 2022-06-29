@@ -72,66 +72,67 @@ const IncomesFScreen = ({setSelector}) => {
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
             {({ handleChange, handleBlur, handleSubmit, values,errors,isValid }) => (
-                <ScrollView style={styles.container}>
-                    <Text style={styles.title}>Ajout Revenus</Text>
-                            <Text style={styles.label}>Montant</Text>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={handleChange('amount')}
-                                onBlur={handleBlur('amount')}
-                                keyboardType="number-pad"
-                                
-                            />
-                            {errors.amount &&
-                                <Text style={styles.error}>{errors.amount}</Text>
-                            }
-                            <Text style={styles.label}>Date</Text>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={handleChange('date')}
-                                onBlur={handleBlur('date')}
-                                placeholder="JJ/MM/AAAA"
-                                
-                            />
-                            {errors.date &&
-                                <Text style={styles.error}>{errors.date}</Text>
-                            }
-                            <Text style={styles.label}>Catégorie</Text>
-                            <TextInput
-                                style={styles.comments}                           
-                                onChangeText={handleChange('category')}
-                                onBlur={handleBlur('category')}
-                                
-                            />
-                            {errors.category &&
-                                <Text style={styles.error}>{errors.category}</Text>
-                            }
-                            <Text style={styles.label}>Commentaires</Text>
-                            <TextInput
-                                style={styles.comments}                           
-                                onChangeText={handleChange('comments')}
-                                onBlur={handleBlur('comments')}
-                            />
-                            {errors.comments &&
-                                <Text style={styles.error}>{errors.comments}</Text>
-                            }
-                            <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
-                                handleSubmit()
-                                if ((isValid) && (values.amount > 0) && (values.date != '') && (values.category != '') && (values.comments != '')) {
-                                    addIncomes(values)
-                                    setSelector(0)
-                                }
-                            }}>
-                                <Text style={styles.textbutton}>Enregistrer</Text>
-                            </Pressable>
+                <View style={styles.container}>
+                    <ScrollView>
+                        <Text style={styles.title}>Ajout Revenus</Text>
+                        <Text style={styles.label}>Montant</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={handleChange('amount')}
+                            onBlur={handleBlur('amount')}
+                            keyboardType="number-pad"
                             
-                            <Pressable style={[styles.button,{backgroundColor:'red'}]} onPress={() => {
+                        />
+                        {errors.amount &&
+                            <Text style={styles.error}>{errors.amount}</Text>
+                        }
+                        <Text style={styles.label}>Date</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={handleChange('date')}
+                            onBlur={handleBlur('date')}
+                            placeholder="JJ/MM/AAAA"
+                            
+                        />
+                        {errors.date &&
+                            <Text style={styles.error}>{errors.date}</Text>
+                        }
+                        <Text style={styles.label}>Catégorie</Text>
+                        <TextInput
+                            style={styles.comments}                           
+                            onChangeText={handleChange('category')}
+                            onBlur={handleBlur('category')}
+                            
+                        />
+                        {errors.category &&
+                            <Text style={styles.error}>{errors.category}</Text>
+                        }
+                        <Text style={styles.label}>Commentaires</Text>
+                        <TextInput
+                            style={styles.comments}                           
+                            onChangeText={handleChange('comments')}
+                            onBlur={handleBlur('comments')}
+                        />
+                        {errors.comments &&
+                            <Text style={styles.error}>{errors.comments}</Text>
+                        }
+                        <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
+                            handleSubmit()
+                            if ((isValid) && (values.amount > 0) && (values.date != '') && (values.category != '') && (values.comments != '')) {
+                                addIncomes(values)
                                 setSelector(0)
-                            }}>
-                                <Text style={styles.textbutton}>Annuler</Text>
-                            </Pressable>
-                    
-                </ScrollView >
+                            }
+                        }}>
+                            <Text style={styles.textbutton}>Enregistrer</Text>
+                        </Pressable>
+                        
+                        <Pressable style={[styles.button,{backgroundColor:'red'}]} onPress={() => {
+                            setSelector(0)
+                        }}>
+                            <Text style={styles.textbutton}>Annuler</Text>
+                        </Pressable>
+                    </ScrollView>
+                </View >
             )}
         </Formik>
         
