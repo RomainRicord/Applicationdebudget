@@ -13,11 +13,11 @@ const ContComponent = (props) => {
 
         <Text style={{fontWeight:'bold',color:montant < 0 ? "red" : "green"}}>{montant < 0 && "-" }{montant > 0 && "+" } {Math.abs(montant)} €</Text>
         <Text>Date: {date_}</Text>
-        <Text style={{fontWeight:'bold'}}>Categorie: {category}</Text>
+        <Text style={{fontWeight:'bold',color:'white'}}>Categorie: {category}</Text>
 
         <View style={{display:'flex',flexDirection:'column'}}>
             
-            <Text>Comments: </Text>
+            <Text style={{color:'white'}}>Comments: </Text>
             <Text style={[styles.commentsComponent]}>{comments}</Text>
             
         </View>

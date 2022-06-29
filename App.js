@@ -124,6 +124,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray', 
     borderWidth: 1,
     width:300,
+    backgroundColor:'rgb(32,32,32)',
+    color:'white'
 
   }
 })

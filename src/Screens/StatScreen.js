@@ -18,7 +18,7 @@ const StatScreen = (props) => {
     return (
         <ScrollView style={{backgroundColor: 'rgb(14,14,14)'}}>
           <View style={{display:'flex',justifyContent:'center',alignItems:'center',flex:1,marginTop:40,backgroundColor: 'rgb(14,14,14)'}}>
-            <Text style={{fontSize:32,fontWeight:'bold'}}>Statistique des revenus</Text>
+            <Text style={{fontSize:32,fontWeight:'bold',color:'white'}}>Statistique des revenus</Text>
             <PieChart
               data={pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line}
               width={200} // from react-native
@@ -50,7 +50,7 @@ const StatScreen = (props) => {
               )
             })}
 
-            <Text style={{fontSize:32,fontWeight:'bold'}}>Statistique des dépenses</Text>
+            <Text style={{fontSize:32,fontWeight:'bold',color:'white'}}>Statistique des dépenses</Text>
 
             <PieChart
               data={pieIncomesChart(UserContext_.expenses_array,UserContext_.incomes_array).line2}

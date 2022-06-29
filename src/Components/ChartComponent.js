@@ -12,7 +12,7 @@ const ChartComponent = () => {
   
     return (
         <SafeAreaView style={styles.container}>
-        <Text style={{fontSize:32,fontWeight:'bold'}}>Analyse des revenus</Text>
+        <Text style={{fontSize:32,fontWeight:'bold',color:'white'}}>Analyse des revenus</Text>
         <BarChart
           data={chart(UserContext_.expenses_array,UserContext_.incomes_array).line}
           width={Dimensions.get('window').width} // from react-native
@@ -35,7 +35,7 @@ const ChartComponent = () => {
           showValuesOnTopOfBars={true}
           yAxisInterval={1}
         />
-        <Text style={{fontSize:32,fontWeight:'bold'}}>Analyse des dépenses</Text>
+        <Text style={{fontSize:32,fontWeight:'bold',color:'white'}}>Analyse des dépenses</Text>
         <BarChart
           data={chart(UserContext_.expenses_array,UserContext_.incomes_array).line2}
           width={Dimensions.get('window').width} // from react-native
