@@ -117,7 +117,7 @@ const IncomesFScreen = ({setSelector}) => {
                             }
                             <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
                                 handleSubmit()
-                                if (isValid) {
+                                if ((isValid) && (values.amount > 0) && (values.date != '') && (values.category != '') && (values.comments != '')) {
                                     addIncomes(values)
                                     setSelector(0)
                                 }

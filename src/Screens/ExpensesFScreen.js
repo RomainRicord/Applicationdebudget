@@ -114,7 +114,7 @@ const ExpensesFScreen = ({setSelector}) => {
                             }                           
                             <Pressable style={[styles.button,{backgroundColor:'blue'}]} onPress={() => {
                                 handleSubmit()
-                                if (isValid) {
+                                if ((isValid) && (values.amount > 0) && (values.date != '') && (values.category != '') && (values.comments != '')) {
                                     addExpense(values)
                                     setSelector(0)
                                 }
