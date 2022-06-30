@@ -24,7 +24,7 @@ const ContScreen = (props) => {
           
           {UserContext_.data_.sort((a,b) => { 
           
-          console.log("Try date",(new Date(b._data.date)),(new Date(a._data.date)),a._data.date,b._data.date,a,b)
+          //console.log("Try date",(new Date(b._data.date)),(new Date(a._data.date)),a._data.date,b._data.date,a,b)
 
           let date1 = new Date(a._data.date)
           let date2 = new Date(b._data.date)
